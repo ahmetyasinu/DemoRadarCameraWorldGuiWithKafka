@@ -1,0 +1,15 @@
+
+m	java:S117K"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â«±8ö¼ß»¾1
+r
+java:S1450"URemove the "camera" field and declare it as a local variable in the relevant methods.(åÛ 8™¢Õ»¾1
+q
+java:S1450"TRemove the "radar" field and declare it as a local variable in the relevant methods.(ç…¡È8›¢Õ»¾1
+]	java:S125"<This block of commented-out lines of code should be removed.(¾û·ûÿÿÿÿ8°¼£º¾1
+\
+java:S6213P":Rename this variable to not match a restricted identifier.(´Å£Ÿıÿÿÿÿ8¾øŞ»¾1
+Y
+java:S1068"7Remove this unused "TOPIC_CAMERA_STATUS" private field.(üóŒˆøÿÿÿÿ8ó¢Õ»¾1
+U
+java:S1068"8Remove this unused "TOPIC_TOWER_POSITION" private field.(ÂĞ…Ø8ô¢Õ»¾1
+Z
+java:S1144["8Remove this unused private "createKafkaConsumer" method.(Ã«šÓûÿÿÿÿ8±İ»¾1
