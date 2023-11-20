@@ -18,4 +18,4 @@ services:
       --create
       --zookeeper
       localhost:2181 --replication-factor 1 --partitions 1
-      --topic CAMERA_LOS_STATUS_TOPIC &) && (supervisord -n)"
+      --topic CameraLostStatus &) && (supervisord -n)"

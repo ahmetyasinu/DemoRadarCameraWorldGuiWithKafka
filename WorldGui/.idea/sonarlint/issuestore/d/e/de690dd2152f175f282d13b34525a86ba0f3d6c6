@@ -12,12 +12,12 @@ java:S21899""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ8äªËÛ¾1
 {	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¹Œ­„úÿÿÿÿ8¬şÁÛ¾1
 v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¶öñ«8¬şÁÛ¾1
 {	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(±¨Éøÿÿÿÿ8¬şÁÛ¾1
-€	java:S116"_Rename this field "TARGET_BEARING_TOPIC" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç³¹šûÿÿÿÿ8Û×¿Ü¾1
-~	java:S116"bRename this field "CAMERA_LOS_STATUS_TOPIC" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§çÕÛ8İ×¿Ü¾1
+€	java:S116"_Rename this field "TARGET_BEARING_TOPIC" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸË‘¤ûÿÿÿÿ8Û×¿Ü¾1
+~	java:S116"bRename this field "CAMERA_LOS_STATUS_TOPIC" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•¤Œ¼8İ×¿Ü¾1
 C
-java:S1170"!Make this final field static too.(Ç³¹šûÿÿÿÿ8ß×¿Ü¾1
+java:S1170"!Make this final field static too.(ŸË‘¤ûÿÿÿÿ8ß×¿Ü¾1
 >
-java:S1170"!Make this final field static too.(§çÕÛ8á×¿Ü¾1
+java:S1170"!Make this final field static too.(•¤Œ¼8á×¿Ü¾1
 g
 java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¹Œ­„úÿÿÿÿ8°şÁÛ¾1
 b

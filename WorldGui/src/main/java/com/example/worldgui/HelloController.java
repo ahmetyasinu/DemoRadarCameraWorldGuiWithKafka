@@ -17,8 +17,8 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class HelloController {
-    private final String TARGET_BEARING_TOPIC = "TARGET_BEARING_TOPIC";
-    private final String CAMERA_LOS_STATUS_TOPIC = "CAMERA_LOS_STATUS_TOPIC";
+    private final String TARGET_BEARING_TOPIC = "TargetBearing";
+    private final String CAMERA_LOS_STATUS_TOPIC = "CameraLostStatus";
     public Polygon radar;
     public Polygon camera;
     public Polygon target;
