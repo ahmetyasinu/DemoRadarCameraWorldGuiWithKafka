@@ -22,28 +22,28 @@ public class RadarSendMessageService {
         sendTargetPosition(message);
     }
 
-    // Placeholder methods for angle and distance calculation (replace with actual logic)
     private double calculateDistance(String data) {
         // Your distance calculation logic based on received position data
         int towerPosition = 30;
         int targetPosition = 110;
-        return targetPosition-towerPosition;
+        return targetPosition - towerPosition;
     }
 
-    private double calculatedeltaX(String data) {
+    private double calculateDeltaX(String data) {
         double deltaX = targetX - radarX;
         return deltaX;
-    }  private double calculatedeltaY(String data) {
+    }
+
+    private double calculateDeltaY(String data) {
         double deltaY = targetY - radarY;
         return deltaY;
     }
 
     public void sendTargetPosition(String message) {
-        double deltaX = calculatedeltaX(message);
-        double deltaY = calculatedeltaY(message);
+        double deltaX = calculateDeltaX(message);
+        double deltaY = calculateDeltaY(message);
         double distance = calculateDistance(message); // Calculate distance based on received position data
         StringBuilder calculateBearingAngle = new StringBuilder();
-        // Calculate angle based on received position data
         calculateBearingAngle.append(deltaX);
         calculateBearingAngle.append(",");
         calculateBearingAngle.append(deltaY);

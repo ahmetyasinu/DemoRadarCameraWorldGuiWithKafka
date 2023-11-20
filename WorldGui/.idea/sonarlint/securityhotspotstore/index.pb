@@ -13,5 +13,3 @@ d
 4src/main/java/com/example/worldgui/dto/KMessage.java,f\9\f9f58d9717ea9dc98c0e4dda3b96ffbc98f21759
 8
 mvnw.cmd,1\f\1f1763f358c257ea3515417352b82b0165647ad1
-q
-Asrc/main/java/com/example/worldgui/config/KafkaConfiguration.java,2\8\28398b943c9df5f060868bb45bd24cb176d26f97

@@ -17,15 +17,15 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class HelloController {
-    private static final String TARGET_BEARING_TOPIC = "TargetPointPosition";
-    private static final String TOPIC_CAMERA_STATUS = "CameraLosStatus";
-    private static final String TOPIC_TOWER_POSITION = "TowerPosition";
+    private final String TARGET_BEARING_TOPIC = "TARGET_BEARING_TOPIC";
+    private final String CAMERA_LOS_STATUS_TOPIC = "CAMERA_LOS_STATUS_TOPIC";
     public Polygon radar;
     public Polygon camera;
     public Polygon target;
-    public final static String kafkaAddress="127.0.0.1:9092";
-    public final static String groupID="worldgui";
 
+    public final static String kafkaUrl = "127.0.0.1:9092";
+    public final static String radarGroupID = "radar";
+    public final static String cameraGroupID = "camera";
     @FXML
     private Button playButton;
 
@@ -35,35 +35,58 @@ public class HelloController {
         playButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Thread kafkaListenerThread = new Thread(this::startKafkaListener);
-                kafkaListenerThread.setDaemon(true);
-                kafkaListenerThread.start();            }
+                Thread kafkaTargetListenerThread = new Thread(this::startKafkaTargetListener);
+                kafkaTargetListenerThread.setDaemon(true);
+                kafkaTargetListenerThread.start();
 
-            private void startKafkaListener() {
+                Thread kafkaCameraStatusListenerThread = new Thread(this::startKafkaCameraStatusListener);
+                kafkaCameraStatusListenerThread.setDaemon(true);
+                kafkaCameraStatusListenerThread.start();
+            }
+
+            private void startKafkaCameraStatusListener() {
                 Properties props = new Properties();
-                props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaAddress);
-                props.put(ConsumerConfig.GROUP_ID_CONFIG, groupID);
+                props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaUrl);
+                props.put(ConsumerConfig.GROUP_ID_CONFIG, cameraGroupID);
                 props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
                 props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
                 Consumer<String, String> consumer = new KafkaConsumer<>(props);
-                consumer.subscribe(Collections.singletonList("TARGET_BEARING_TOPIC"));
+                consumer.subscribe(Collections.singletonList(CAMERA_LOS_STATUS_TOPIC));
 
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
-                    records.forEach(record -> {
-                        Platform.runLater(() -> listenTopicTargetPosition(record.value()));
-                    });
+                    records.forEach(cameraStatusMessage -> Platform.runLater(() -> handleCameraStatus(cameraStatusMessage.value())));
+                }
+            }
+
+            private void startKafkaTargetListener() {
+                Properties props = new Properties();
+                props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaUrl);
+                props.put(ConsumerConfig.GROUP_ID_CONFIG, radarGroupID);
+                props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+                props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+
+                Consumer<String, String> consumer = new KafkaConsumer<>(props);
+                consumer.subscribe(Collections.singletonList(TARGET_BEARING_TOPIC));
+
+                while (true) {
+                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+
+                    records.forEach(targetMessage -> Platform.runLater(() -> handleTargetPosition(targetMessage.value())));
                 }
             }
         });
 
     }
 
-    private void listenTopicTargetPosition(String message) {
+    private void handleCameraStatus(String message) {
+        new Thread(() -> camera.setVisible(Boolean.parseBoolean(message))).start();
+    }
+
+    private void handleTargetPosition(String message) {
         new Thread(() -> {
-            // Process messages from TargetPointPosition topic
             int split = message.indexOf(",");
             int lastSplit = message.lastIndexOf(",");
             double x = Double.parseDouble(message.substring(0, split));
@@ -74,10 +97,9 @@ public class HelloController {
     }
 
     private void updateTargetPosition(double x, double y) {
-        // Update the position of the target triangle
         target.setLayoutX(x);
         target.setLayoutY(y);
-        target.setVisible(true); // Make it visible at the updated position
+        target.setVisible(true);
     }
 
 }
